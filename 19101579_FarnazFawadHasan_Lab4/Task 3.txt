@@ -1,0 +1,193 @@
+R2>en
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#ip dhcp ex
+% Incomplete command.
+R2(config)#ip dhcp excluded- address?
+% Unrecognized command
+R2(config)#ip dhcp excluded-address 192.168.10.1 192.168.10.10
+R2(config)#ip dhcp excluded-address 192.168.10.1 ?
+  A.B.C.D  High IP address
+  <cr>
+R2(config)#ip dhcp excluded-address 192.168.10.1 
+R2(config)#ip dhcp excluded-address 192.168.30.1 192.168.30.10
+R2(config)#ip dhcp pool R1-LAN
+R2(dhcp-config)#network?
+network  
+R2(dhcp-config)#network ?
+  A.B.C.D  Network number in dotted-decimal notation
+R2(dhcp-config)#network 
+% Incomplete command.
+R2(dhcp-config)#network 192.168.10.0 255.255.255.0
+R2(dhcp-config)#default-router 192.168.10.1
+R2(dhcp-config)#dns server 192.160.20.254
+                    ^
+% Invalid input detected at '^' marker.
+	
+R2(dhcp-config)#dns-server 192.168.20.254
+R2(dhcp-config)#exit
+R2(config)#ip dhcp pool R3-LAN
+R2(dhcp-config)#network 192.168.30.0 255.255.255.0
+R2(dhcp-config)#default-router 192.168.30.1
+R2(dhcp-config)#dns-server 192.168.20.254
+R2(dhcp-config)#
+R2(dhcp-config)#
+R2(dhcp-config)#exit
+R2(config)#int
+% Incomplete command.
+R2(config)#interface gigabitEthernet 0/1
+R2(config-if)#ip address dhcp
+R2(config-if)#no shutdown
+
+R2(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+R2(config-if)#
+R2(config-if)#show ip interface brief
+                ^
+% Invalid input detected at '^' marker.
+	
+R2(config-if)#exit
+R2(config)#exit
+R2#
+%SYS-5-CONFIG_I: Configured from console by console
+show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     192.168.20.1    YES manual up                    up 
+GigabitEthernet0/1     unassigned      YES DHCP   up                    up 
+Serial0/0/0            10.1.1.2        YES manual up                    up 
+Serial0/0/1            10.2.2.2        YES manual up                    up 
+Serial0/1/0            unassigned      YES unset  down                  down 
+Serial0/1/1            unassigned      YES unset  down                  down 
+Vlan1                  unassigned      YES unset  administratively down down
+R2#
+%DHCP-6-ADDRESS_ASSIGN: Interface GigabitEthernet0/1 assigned DHCP address 209.165.200.231, mask 255.255.255.224, hostname R2
+
+
+%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 209.165.200.225 (GigabitEthernet0/1) is up: new adjacency
+
+
+
+R1
+
+R1>en
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#interface gigabitEthernet 0/0
+R1(config-if)#ip helper-address 10.1.1.2
+R1(config-if)#
+
+
+R3
+
+
+R3>en
+R3#conf t
+         ^
+% Invalid input detected at '^' marker.
+	
+R3#interface gigabitEthernet 0/0
+             ^
+% Invalid input detected at '^' marker.
+	
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#interface gigabitEthernet 0/0
+R3(config-if)#ip helper-address 10.2.2.2
+R3(config-if)#
+R3(config-if)#
+
+
+
+PC1
+
+Cisco Packet Tracer PC Command Line 1.0
+C:\>ipconfig /all
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Physical Address................: 0002.4AA5.1470
+   Link-local IPv6 Address.........: FE80::202:4AFF:FEA5:1470
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.10.11
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     192.168.10.1
+   DHCP Servers....................: 10.1.1.2
+   DHCPv6 IAID.....................: 
+   DHCPv6 Client DUID..............: 00-01-00-01-BE-54-B0-9C-00-02-4A-A5-14-70
+   DNS Servers.....................: ::
+                                     192.168.20.254
+
+Bluetooth Connection:
+
+   Connection-specific DNS Suffix..: 
+   Physical Address................: 000A.F30C.400E
+   Link-local IPv6 Address.........: ::
+   IPv6 Address....................: ::
+   IPv4 Address....................: 0.0.0.0
+   Subnet Mask.....................: 0.0.0.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+   DHCP Servers....................: 0.0.0.0
+   DHCPv6 IAID.....................: 
+   DHCPv6 Client DUID..............: 00-01-00-01-BE-54-B0-9C-00-02-4A-A5-14-70
+   DNS Servers.....................: ::
+                                     192.168.20.254
+
+
+C:\>
+C:\>ping 192.168.10.11
+
+Pinging 192.168.10.11 with 32 bytes of data:
+
+Reply from 192.168.10.11: bytes=32 time=14ms TTL=128
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.11: bytes=32 time<1ms TTL=128
+Reply from 192.168.10.11: bytes=32 time=11ms TTL=128
+
+Ping statistics for 192.168.10.11:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 14ms, Average = 6ms
+
+C:\>ping 209.165.202.158
+
+Pinging 209.165.202.158 with 32 bytes of data:
+
+Reply from 209.165.202.158: bytes=32 time=1ms TTL=125
+Reply from 209.165.202.158: bytes=32 time=1ms TTL=125
+Reply from 209.165.202.158: bytes=32 time=1ms TTL=125
+Reply from 209.165.202.158: bytes=32 time=12ms TTL=125
+
+Ping statistics for 209.165.202.158:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 12ms, Average = 3ms
+
+C:\>
+
+PC2
+
+
+Cisco Packet Tracer PC Command Line 1.0
+C:\>ping 209.165.202.158
+
+Pinging 209.165.202.158 with 32 bytes of data:
+
+Request timed out.
+Reply from 209.165.202.158: bytes=32 time=1ms TTL=125
+Reply from 209.165.202.158: bytes=32 time=1ms TTL=125
+Reply from 209.165.202.158: bytes=32 time=6ms TTL=125
+
+Ping statistics for 209.165.202.158:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 6ms, Average = 2ms
+
+C:\>
+
+
